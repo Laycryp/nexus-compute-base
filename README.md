@@ -25,15 +25,22 @@ To run the full DePIN lifecycle on your local machine, you need to start both th
 Create a `.env.local` file in the root directory and add your provider wallet private key:
 ```env
 PROVIDER_PRIVATE_KEY=0xYourPrivateKeyHere
-
+```
 Note: A .env.example is provided for reference. Never commit your actual .env.local.
 
 ### 2. Start the Provider Node Simulator
-Open a terminal instance and start the daemon to listen for Base network tasks: node scripts/simulator.mjs
+Open a terminal instance and start the daemon to listen for Base network tasks:
+
+```Bash
+node scripts/simulator.mjs
+```
 
 ### 3. Start the Web Interface
-Open a separate terminal instance and launch the Next.js development server: npm run dev
+Open a separate terminal instance and launch the Next.js development server:
 
+```Bash
+npm run dev
+```
 Navigate to http://localhost:3000 to interact with the protocol.
 
 Contract Addresses
