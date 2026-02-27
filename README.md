@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus Compute
 
-## Getting Started
+Decentralized AI Power, Scaled on Base. Nexus Compute is a micro-compute DePIN (Decentralized Physical Infrastructure Network) layer that connects idle GPU providers with AI developers requiring computation power, utilizing smart contracts for trustless task management and automated reward escrow.
 
-First, run the development server:
+## Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The protocol is built with a clear separation of concerns to ensure scalability and trust:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Smart Contracts (Base Sepolia):** A robust Escrow and Registry system built with Solidity. It handles provider registration, locks developer funds, and securely releases rewards upon task completion.
+* **Web Application:** A high-performance interface built with Next.js 16 (App Router), Tailwind CSS, Wagmi v2, and RainbowKit. It features two distinct dashboards for Developers (Task Deployment) and Providers (Node Registration).
+* **Provider Node Simulator:** A Node.js background daemon utilizing `viem` to actively poll the Base network, detect new computation tasks, simulate GPU processing, and automatically claim rewards on behalf of the registered provider.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technology Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Network:** Base (EVM Layer 2)
+* **Frontend:** React 18, Next.js, Tailwind CSS
+* **Web3 Integration:** Wagmi v2, Viem, RainbowKit
+* **Backend/Node:** Node.js (Simulator)
 
-## Learn More
+## Running the Protocol Locally
 
-To learn more about Next.js, take a look at the following resources:
+To run the full DePIN lifecycle on your local machine, you need to start both the frontend interface and the provider node simulator.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Environment Variables
+Create a `.env.local` file in the root directory and add your provider wallet private key:
+```env
+PROVIDER_PRIVATE_KEY=0xYourPrivateKeyHere
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Note: A .env.example is provided for reference. Never commit your actual .env.local.
 
-## Deploy on Vercel
+### 2. Start the Provider Node Simulator
+Open a terminal instance and start the daemon to listen for Base network tasks: node scripts/simulator.mjs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Start the Web Interface
+Open a separate terminal instance and launch the Next.js development server: npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Navigate to http://localhost:3000 to interact with the protocol.
+
+Contract Addresses
+NexusCompute (Base Sepolia): 0x38E8e242Ea91F6896BE56675a60ec8199DE48B88
+
+License
+This project is licensed under the MIT License.

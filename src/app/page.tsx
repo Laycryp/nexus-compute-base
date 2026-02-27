@@ -1,65 +1,42 @@
-import Image from "next/image";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ProviderDashboard } from '@/components/ProviderDashboard';
+import { DeveloperDashboard } from '@/components/DeveloperDashboard';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-gray-950 flex flex-col items-center py-12 px-4 relative overflow-hidden">
+      {/* تأثيرات الإضاءة في الخلفية (Neon Glow) */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+      {/* قسم الترويسة والاتصال */}
+      <div className="z-10 flex flex-col items-center text-center space-y-6 w-full max-w-4xl mb-12">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+          <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
+            Nexus Compute
+          </span>
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-400 font-light">
+          Decentralized AI Power, Scaled on Base
+        </p>
+
+        <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 backdrop-blur-sm shadow-2xl flex flex-col items-center space-y-4">
+          <p className="text-gray-300 text-sm text-center">
+            Connect your wallet to provide GPU power or run AI models on our scalable DePIN layer.
           </p>
+          <ConnectButton 
+            accountStatus="avatar"
+            chainStatus="icon"
+            showBalance={false}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+
+      {/* قسم اللوحات (يظهر فقط عند الاتصال عبر المكونات نفسها) */}
+      <div className="z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-6xl">
+        <ProviderDashboard />
+        <DeveloperDashboard />
+      </div>
+    </main>
   );
 }
